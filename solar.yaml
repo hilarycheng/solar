@@ -1,0 +1,113 @@
+points:
+  key:
+    footprints:
+      diode:
+        type: diode
+        nets:
+          from: =colrow
+          to: =row_net
+        anchor:
+          shift: [0, 5]
+        params:
+          through_hole: false
+      choc_hotswap:
+        type: choc
+        params:
+          hotswap: true
+          reverse: true
+          keycaps: true
+        nets:
+          from: =colrow
+          to: =column_net
+        anchor:
+          rotate: 180
+  zones:
+    matrix:
+      anchor:
+        rotate: 0
+      columns:
+        func:
+          stagger: 0
+          key:
+            column_net: P20
+        little:
+          stagger: 0
+          key:
+            column_net: P19
+        ring:
+          stagger: 0
+          key:
+            column_net: P18
+        middle:
+          stagger: 0
+          key:
+            column_net: P15
+        index:
+          stagger: 0
+          key:
+            column_net: P14
+      rows:
+        numbers:
+          row_net: P6
+          bind: [4, 25, 4, 4]
+        top:
+          row_net: P5
+          bind: [4, 25, 4, 4]
+        middle:
+          row_net: P4
+          bind: [4, 25, 4, 4]
+        bottom:
+          row_net: P3
+          bind: [4, 25, 4, 4]
+outlines:
+  exports:
+    raw:
+      - type: keys
+        side: left
+        size: [1cx , 1cy]
+    cutout:
+      - type: outline
+        name: raw
+        fillet: 1
+    keycap_outlines:
+      - type: keys
+        side: left
+        size: [1cx - 0.5, 1cy - 0.5] # Choc keycaps are 17.5 x 16.5
+        bound: false
+pcbs:
+  solar:
+    outlines:
+      main:
+        outline: cutout
+    footprints:
+      promicro:
+        type: promicro
+        anchor:
+          ref: matrix_index_bottom
+          shift: [25, -9]
+          rotate: 270
+        params:
+          orientation: down
+      reset_switch:
+        type: button
+        anchor:
+          ref: matrix_index_numbers
+          shift: [25, 5]
+        nets:
+          from: RST
+          to: GND
+      trrs:
+        type: trrs
+        anchor:
+          ref: matrix_index_numbers
+          shift: [32, -8]
+          rotate: -90
+        params:
+          mirror: true
+          reverse: false
+          symmetric: false
+        nets:
+          A: VCC
+          B: P2
+          C: P3
+          D: GND
